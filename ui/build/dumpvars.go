@@ -125,7 +125,7 @@ func dumpMakeVars(ctx Context, config Config, goals, vars []string, write_soong_
 var BannerVars = []string{
 	"PLATFORM_VERSION_CODENAME",
 	"PLATFORM_VERSION",
-	"LINEAGE_VERSION",
+	"420ROM_VERSION",
 	"TARGET_PRODUCT",
 	"TARGET_BUILD_VARIANT",
 	"TARGET_BUILD_TYPE",
@@ -157,13 +157,35 @@ var BannerVars = []string{
 func Banner(make_vars map[string]string) string {
 	b := &bytes.Buffer{}
 
-	fmt.Fprintln(b, "============================================")
+	fmt.Fprintln(b, "====================================================")
 	for _, name := range BannerVars {
 		if make_vars[name] != "" {
 			fmt.Fprintf(b, "%s=%s\n", name, make_vars[name])
 		}
 	}
-	fmt.Fprint(b, "============================================")
+	fmt.Fprintln(b, "====================================================")
+	fmt.Fprintln(b, " ")
+	fmt.Fprintln(b, "====================================================")
+	fmt.Fprintln(b, " 420rom 5.0 Pixel Edition - Android base 10.0.0 r40 ")
+	fmt.Fprintln(b, "====================================================")
+
+	fmt.Fprintf(b, "%s=%s\n", "420ROM_VERSION", make_vars["420ROM_VERSION"])
+	fmt.Fprintf(b, "%s=%s\n", "PLATFORM_VERSION", make_vars["PLATFORM_VERSION"])
+	fmt.Fprintf(b, "%s=%s\n", "BUILD_ID", make_vars["BUILD_ID"])	
+	fmt.Fprintf(b, "%s=%s\n", "TARGET_PRODUCT", make_vars["TARGET_PRODUCT"])
+	fmt.Fprintf(b, "%s=%s\n", "TARGET_BUILD_VARIANT", make_vars["TARGET_BUILD_VARIANT"])
+	fmt.Fprintf(b, "%s=%s\n", "TARGET_GCC_VERSION", make_vars["TARGET_GCC_VERSION"])
+	fmt.Fprintf(b, "%s=%s\n", "TARGET_ARCH", make_vars["TARGET_ARCH"])
+	fmt.Fprintf(b, "%s=%s\n", "TARGET_ARCH_VARIANT", make_vars["TARGET_ARCH_VARIANT"])
+	fmt.Fprintf(b, "%s=%s\n", "TARGET_CPU_VARIANT", make_vars["TARGET_CPU_VARIANT"])
+	fmt.Fprintf(b, "%s=%s\n", "TARGET_2ND_ARCH", make_vars["TARGET_2ND_ARCH"])
+	fmt.Fprintf(b, "%s=%s\n", "TARGET_2ND_ARCH_VARIANT", make_vars["TARGET_2ND_ARCH_VARIANT"])
+	fmt.Fprintf(b, "%s=%s\n", "TARGET_2ND_CPU_VARIANT", make_vars["TARGET_2ND_CPU_VARIANT"])
+	fmt.Fprintf(b, "%s=%s\n", "HOST_ARCH", make_vars["HOST_ARCH"])
+	fmt.Fprintf(b, "%s=%s\n", "HOST_OS", make_vars["HOST_OS"])
+	fmt.Fprintf(b, "%s=%s\n", "HOST_OS_EXTRA", make_vars["HOST_OS_EXTRA"])
+	fmt.Fprintf(b, "%s=%s\n", "OUT_DIR", make_vars["OUT_DIR"])
+	fmt.Fprintln(b, "====================================================")
 
 	return b.String()
 }
