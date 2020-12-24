@@ -323,10 +323,10 @@ func (compiler *baseCompiler) compilerFlags(ctx ModuleContext, flags Flags, deps
 		flags.Global.CommonFlags = append(flags.Global.CommonFlags, "-D__ANDROID_RECOVERY__")
 	}
 
-	if ctx.apexName() != "" {
+	if ctx.apexVariationName() != "" {
 		flags.Global.CommonFlags = append(flags.Global.CommonFlags, "-D__ANDROID_APEX__")
 		if Bool(compiler.Properties.Use_apex_name_macro) {
-			flags.Global.CommonFlags = append(flags.Global.CommonFlags, "-D__ANDROID_APEX_"+makeDefineString(ctx.apexName())+"__")
+			flags.Global.CommonFlags = append(flags.Global.CommonFlags, "-D__ANDROID_APEX_"+makeDefineString(ctx.apexVariationName())+"__")
 		}
 		if ctx.Device() {
 			flags.Global.CommonFlags = append(flags.Global.CommonFlags, "-D__ANDROID_SDK_VERSION__="+strconv.Itoa(ctx.apexSdkVersion()))
@@ -546,6 +546,10 @@ func (compiler *baseCompiler) hasSrcExt(ext string) bool {
 	}
 
 	return false
+}
+
+func (compiler *baseCompiler) uniqueApexVariations() bool {
+	return Bool(compiler.Properties.Use_apex_name_macro)
 }
 
 // makeDefineString transforms a name of an APEX module into a value to be used as value for C define

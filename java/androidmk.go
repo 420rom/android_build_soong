@@ -336,7 +336,7 @@ func (app *AndroidApp) AndroidMkEntries() []android.AndroidMkEntries {
 					entries.SetPath("LOCAL_SOONG_PROGUARD_DICT", app.proguardDictionary)
 				}
 
-				if app.Name() == "framework-res" {
+				if app.Name() == "framework-res" || app.Name() == "org.lineageos.platform-res" {
 					entries.SetString("LOCAL_MODULE_PATH", "$(TARGET_OUT_JAVA_LIBRARIES)")
 					// Make base_rules.mk not put framework-res in a subdirectory called
 					// framework_res.
@@ -463,7 +463,7 @@ func (a *AndroidLibrary) AndroidMkEntries() []android.AndroidMkEntries {
 			entries.SetPath("LOCAL_SOONG_AAR", a.aarFile)
 		}
 
-		if a.Name() == "framework-res" {
+		if a.Name() == "framework-res" || a.Name() == "org.lineageos.platform-res" {
 			entries.SetString("LOCAL_MODULE_PATH", "$(TARGET_OUT_JAVA_LIBRARIES)")
 			// Make base_rules.mk not put framework-res in a subdirectory called
 			// framework_res.
@@ -541,14 +541,12 @@ func (ddoc *Droiddoc) AndroidMkEntries() []android.AndroidMkEntries {
 					fmt.Fprintln(w, ddoc.Name()+"-check-last-released-api:",
 						ddoc.checkLastReleasedApiTimestamp.String())
 
-					if ddoc.Name() == "api-stubs-docs" || ddoc.Name() == "system-api-stubs-docs" {
-						fmt.Fprintln(w, ".PHONY: checkapi")
-						fmt.Fprintln(w, "checkapi:",
-							ddoc.checkLastReleasedApiTimestamp.String())
+					fmt.Fprintln(w, ".PHONY: checkapi")
+					fmt.Fprintln(w, "checkapi:",
+						ddoc.checkLastReleasedApiTimestamp.String())
 
-						fmt.Fprintln(w, ".PHONY: droidcore")
-						fmt.Fprintln(w, "droidcore: checkapi")
-					}
+					fmt.Fprintln(w, ".PHONY: droidcore")
+					fmt.Fprintln(w, "droidcore: checkapi")
 				}
 			},
 		},
