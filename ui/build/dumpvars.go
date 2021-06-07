@@ -139,7 +139,7 @@ func dumpMakeVars(ctx Context, config Config, goals, vars []string, write_soong_
 var BannerVars = []string{
 	"PLATFORM_VERSION_CODENAME",
 	"PLATFORM_VERSION",
-	"420ROM_VERSION",
+	"FOUR20ROM_VERSION",
 	"TARGET_PRODUCT",
 	"TARGET_BUILD_VARIANT",
 	"TARGET_BUILD_TYPE",
@@ -151,12 +151,8 @@ var BannerVars = []string{
 	"TARGET_2ND_ARCH_VARIANT",
 	"TARGET_2ND_CPU_VARIANT",
 	"HOST_ARCH",
-	"HOST_2ND_ARCH",
 	"HOST_OS",
 	"HOST_OS_EXTRA",
-	"HOST_CROSS_OS",
-	"HOST_CROSS_ARCH",
-	"HOST_CROSS_2ND_ARCH",
 	"HOST_BUILD_TYPE",
 	"BUILD_ID",
 	"OUT_DIR",
@@ -179,7 +175,7 @@ func Banner(make_vars map[string]string) string {
 	fmt.Fprintln(b, " 420rom 11.0 Pixel Edition - Android base 11.0.0 r37 ")
 	fmt.Fprintln(b, "=====================================================")
 
-	fmt.Fprintf(b, "%s=%s\n", "420ROM_VERSION", make_vars["420ROM_VERSION"])
+	fmt.Fprintf(b, "%s=%s\n", "FOUR20ROM_VERSION", make_vars["FOUR20ROM_VERSION"])
 	fmt.Fprintf(b, "%s=%s\n", "PLATFORM_VERSION", make_vars["PLATFORM_VERSION"])
 	fmt.Fprintf(b, "%s=%s\n", "BUILD_ID", make_vars["BUILD_ID"])	
 	fmt.Fprintf(b, "%s=%s\n", "TARGET_PRODUCT", make_vars["TARGET_PRODUCT"])
