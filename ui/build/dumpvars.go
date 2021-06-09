@@ -172,7 +172,7 @@ func Banner(make_vars map[string]string) string {
 		}
 	}
 	fmt.Fprintln(b, "=====================================================")
-	fmt.Fprintln(b, " 420rom 11.0 Pixel Edition - Android base 11.0.0 r37 ")
+	fmt.Fprintln(b, " 420rom 11.0 Pixel Edition - Android base 11.0.0 r38 ")
 	fmt.Fprintln(b, "=====================================================")
 
 	fmt.Fprintf(b, "%s=%s\n", "FOUR20ROM_VERSION", make_vars["FOUR20ROM_VERSION"])
